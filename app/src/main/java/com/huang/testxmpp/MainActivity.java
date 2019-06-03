@@ -14,13 +14,12 @@ import com.huang.fragment.MeFragment;
 import com.huang.fragment.SessionFragment;
 import com.huang.utils.CommonUtils;
 import com.huang.xmpp.XmppConnection;
-
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
 public class MainActivity extends BaseActivity {
-    @Bind(R.id.home_group)
+    @BindView(R.id.home_group)
     RadioGroup home_group;
 
     private FragmentManager manager;

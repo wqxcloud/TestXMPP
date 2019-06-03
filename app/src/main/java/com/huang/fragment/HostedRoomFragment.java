@@ -13,12 +13,9 @@ import com.huang.adapter.HostedRoomAdapter;
 import com.huang.bean.HostedRoomBean;
 import com.huang.testxmpp.ChatActivity;
 import com.huang.testxmpp.R;
-import com.huang.xmpp.Constant;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -27,7 +24,7 @@ import butterknife.ButterKnife;
  */
 
 public class HostedRoomFragment extends Fragment implements View.OnClickListener {
-    @Bind(R.id.hosted_room_lv)
+    @BindView(R.id.hosted_room_lv)
     ListView listView;
 
     private List<HostedRoomBean> list = new ArrayList<>();

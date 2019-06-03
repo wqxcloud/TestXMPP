@@ -59,7 +59,7 @@ public class XMConnectionListener implements ConnectionListener {
             XmppConnection.getInstance().closeConnection();
             // 重连服务器
             tExit = new Timer();
-            tExit.schedule(new TimeTask(), loginTime);
+            //tExit.schedule(new TimeTask(), loginTime);
         } else {
             // 退出登录
         }

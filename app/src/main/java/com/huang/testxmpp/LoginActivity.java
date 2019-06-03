@@ -20,8 +20,7 @@ import org.jivesoftware.smackx.muc.MultiUserChat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -32,11 +31,11 @@ import butterknife.OnClick;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener
 {
-    @Bind(R.id.login_name_et)
+    @BindView(R.id.login_name_et)
     EditText nameEt;
-    @Bind(R.id.login_password_et)
+    @BindView(R.id.login_password_et)
     EditText passwordEt;
-    @Bind(R.id.login_bt)
+    @BindView(R.id.login_bt)
     Button loginBt;
 
     @Override

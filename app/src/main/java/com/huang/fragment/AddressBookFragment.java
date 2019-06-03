@@ -21,7 +21,7 @@ import org.jivesoftware.smack.roster.RosterEntry;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -30,7 +30,7 @@ import butterknife.ButterKnife;
  */
 
 public class AddressBookFragment extends Fragment {
-    @Bind(R.id.address_book_lv)
+    @BindView(R.id.address_book_lv)
     ListView listView;
 
     private List<RosterEntry> list = new ArrayList<>();
