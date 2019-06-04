@@ -130,7 +130,7 @@ public class XmppConnection {
                 //设置端口号：默认5222
                 config.setPort(SERVER_PORT);
                 //禁用SSL连接
-                config.setSecurityMode(ConnectionConfiguration.SecurityMode.disabled).setCompressionEnabled(false);
+                config.setSecurityMode(ConnectionConfiguration.SecurityMode.disabled);
                 //设置Debug
                 config.enableDefaultDebugger();
                 //设置离线状态

@@ -15,6 +15,7 @@ import com.huang.xmpp.Constant;
 import com.huang.xmpp.XMChatMessageListener;
 import com.huang.xmpp.XmppConnection;
 
+import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.chat2.ChatManager;
 import org.jivesoftware.smackx.iqregister.AccountManager;
 import org.jivesoftware.smackx.muc.MultiUserChat;
@@ -34,6 +35,7 @@ import butterknife.OnClick;
  */
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
+    private static String TAG = "LoginActivity";
     @BindView(R.id.login_name_et)
     EditText nameEt;
     @BindView(R.id.login_password_et)
@@ -132,14 +134,33 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 }
                 break;
             case R.id.login_register:
+                String account = nameEt.getText().toString();
+                String pwd = passwordEt.getText().toString();
+                if(TextUtils.isEmpty(account) || TextUtils.isEmpty(pwd)){
+                    Toast.makeText(LoginActivity.this,"账号密码不能为空",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 try {
-                    AccountManager.getInstance(XmppConnection.getInstance().getConnection()).createAccount(Localpart.from("dowa"), passwordEt.getText().toString());
-                    AccountManager.sensitiveOperationOverInsecureConnectionDefault(true);
+                    XMPPConnection xmppConnection = XmppConnection.getInstance().getConnection();
+                    if(xmppConnection != null && xmppConnection.isConnected()){
+
+                        Log.i(TAG, "onClick: "+xmppConnection.isConnected());
+                        Log.i(TAG, "onClick: "+xmppConnection.isSecureConnection());
+
+                        AccountManager accountManager = AccountManager.getInstance(XmppConnection.getInstance().getConnection());
+                        Log.i(TAG, "onClick: "+accountManager.supportsAccountCreation());
+                        if(accountManager.supportsAccountCreation()){
+                            accountManager.sensitiveOperationOverInsecureConnection(true);
+                            Log.e(TAG, "onClick: account:"+account);
+                            Log.e(TAG, "onClick: pwd:"+pwd);
+                            accountManager.createAccount(Localpart.from(account), pwd);
+                        }
+                    }
                     Toast.makeText(LoginActivity.this,"注册成功",Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
+                    Log.i(TAG, "onClick: "+e);
                     Toast.makeText(LoginActivity.this,"注册失败:"+e.getMessage(),Toast.LENGTH_SHORT).show();
                 }
-
                 break;
         }
     }
