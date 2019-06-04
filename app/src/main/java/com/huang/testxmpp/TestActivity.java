@@ -108,7 +108,7 @@ public class TestActivity extends BaseActivity {
             //禁用SSL连接
             config.setSecurityMode(ConnectionConfiguration.SecurityMode.disabled).setCompressionEnabled(false);
             //设置Debug
-            config.setDebuggerEnabled(true);
+            config.enableDefaultDebugger();
             //设置离线状态
             config.setSendPresence(false);
             //需要经过同意才可以添加好友
@@ -118,44 +118,30 @@ public class TestActivity extends BaseActivity {
             //SASLAuthentication.blacklistSASLMechanism("DIGEST-MD5");
 
             connection = new XMPPTCPConnection(config.build());
-            connection.addConnectionListener(new ConnectionListener() {
-                @Override
-                public void connected(XMPPConnection xmppConnection) {
-                    Log.e("ConnectionListener", "connected");
-                }
+            connection.addConnectionListener(
+                    new ConnectionListener() {
+                        @Override
+                        public void connected(XMPPConnection connection) {
+                            Log.e("ConnectionListener", "connected");
+                        }
 
-                @Override
-                public void authenticated(XMPPConnection xmppConnection, boolean b) {
-                    Log.e("ConnectionListener", "authenticated" + b);
-                }
+                        @Override
+                        public void authenticated(XMPPConnection connection, boolean resumed) {
+                            Log.e("ConnectionListener", "authenticated" + resumed);
+                        }
 
-                @Override
-                public void connectionClosed() {
-                    Log.e("ConnectionListener", "connectionClosed");
-                }
+                        @Override
+                        public void connectionClosed() {
+                            Log.e("ConnectionListener", "connectionClosed");
+                        }
 
-                @Override
-                public void connectionClosedOnError(Exception e) {
-                    Log.e("ConnectionListener", "connectionClosedOnError");
-                }
-
-                @Override
-                public void reconnectionSuccessful() {
-                    Log.e("ConnectionListener", "reconnectionSuccessful");
-                }
-
-                @Override
-                public void reconnectingIn(int i) {
-                    Log.e("ConnectionListener", "reconnectingIn" + i);
-                }
-
-                @Override
-                public void reconnectionFailed(Exception e) {
-                    Log.e("ConnectionListener", "reconnectionFailed" + e.getMessage());
-                }
-            });
+                        @Override
+                        public void connectionClosedOnError(Exception e) {
+                            Log.e("ConnectionListener", "connectionClosedOnError");
+                        }
+                    });
         } catch (Exception e) {
-            Log.i("wangqx","e="+e);
+            Log.i("wangqx", "e=" + e);
             e.printStackTrace();
         }
         return connection;

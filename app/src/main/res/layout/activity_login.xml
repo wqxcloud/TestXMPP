@@ -22,7 +22,7 @@
             android:id="@+id/login_password_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
+            android:inputType="text"
              />
 
         <Button
@@ -32,6 +32,14 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
             android:text="登录"
+            android:visibility="visible" />
+        <Button
+            android:id="@+id/login_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:text="注册"
             android:visibility="visible" />
     </LinearLayout>
 </RelativeLayout>

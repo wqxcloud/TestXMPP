@@ -5,6 +5,7 @@ import android.util.Log;
 
 import org.jivesoftware.smack.AbstractXMPPConnection;
 import org.jivesoftware.smack.ConnectionConfiguration;
+import org.jivesoftware.smack.SASLAuthentication;
 import org.jivesoftware.smack.SmackConfiguration;
 import org.jivesoftware.smack.SmackException;
 import org.jivesoftware.smack.StanzaListener;
@@ -20,6 +21,7 @@ import org.jivesoftware.smack.provider.ProviderManager;
 import org.jivesoftware.smack.roster.Roster;
 import org.jivesoftware.smack.roster.RosterEntry;
 import org.jivesoftware.smack.roster.RosterGroup;
+import org.jivesoftware.smack.sasl.core.SCRAMSHA1Mechanism;
 import org.jivesoftware.smack.tcp.XMPPTCPConnection;
 import org.jivesoftware.smack.tcp.XMPPTCPConnectionConfiguration;
 import org.jivesoftware.smack.util.StringUtils;
@@ -130,7 +132,7 @@ public class XmppConnection {
                 //禁用SSL连接
                 config.setSecurityMode(ConnectionConfiguration.SecurityMode.disabled).setCompressionEnabled(false);
                 //设置Debug
-                config.setDebuggerEnabled(true);
+                config.enableDefaultDebugger();
                 //设置离线状态
                 config.setSendPresence(false);
                 //设置开启压缩，可以节省流量
@@ -220,6 +222,8 @@ public class XmppConnection {
      * @return true登录成功
      */
     public boolean login(String account, String password) {
+        //SCRAMSHA1Mechanism scramsha1Mechanism = new SCRAMSHA1Mechanism();
+        //SASLAuthentication.registerSASLMechanism(scramsha1Mechanism);
         try {
             if (getConnection() == null)
                 return false;

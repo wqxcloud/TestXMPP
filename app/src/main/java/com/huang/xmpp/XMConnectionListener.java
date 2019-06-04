@@ -78,7 +78,7 @@ public class XMConnectionListener implements ConnectionListener {
                             Log.i("XMConnectionListener", "登录成功");
                         } else {
                             Log.i("XMConnectionListener", "重新登录");
-                            tExit.schedule(new TimeTask(), loginTime);
+                            //tExit.schedule(new TimeTask(), loginTime);
                         }
                     }
                 } catch (Exception e) {
@@ -87,20 +87,4 @@ public class XMConnectionListener implements ConnectionListener {
             }
         }
     }
-
-    @Override
-    public void reconnectingIn(int in) {
-        Log.i("XMConnectionListener", "reconnectingIn" + in);
-    }
-
-    @Override
-    public void reconnectionFailed(Exception e) {
-        Log.i("XMConnectionListener", "reconnectionFailed" + e.getMessage());
-    }
-
-    @Override
-    public void reconnectionSuccessful() {
-        Log.i("XMConnectionListener", "reconnectionSuccessful");
-    }
-
 }

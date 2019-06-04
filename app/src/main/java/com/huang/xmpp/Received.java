@@ -56,13 +56,18 @@ public class Received  implements ExtensionElement
         return "urn:xmpp:receipts";
     }
 
+//    @Override
+//    public String toXML() {
+//        StringBuilder buffer = new StringBuilder();
+//        buffer.append("<received xmlns=\"urn:xmpp:receipts\"");
+//        buffer.append(" id=\"").append(StringUtils.escapeForXml(id)).append("\"");
+//        buffer.append(" status=\"").append(status).append("\"");
+//        buffer.append("/>");
+//        return buffer.toString();
+//    }
+
     @Override
-    public String toXML() {
-        StringBuilder buffer = new StringBuilder();
-        buffer.append("<received xmlns=\"urn:xmpp:receipts\"");
-        buffer.append(" id=\"").append(StringUtils.escapeForXML(id)).append("\"");
-        buffer.append(" status=\"").append(status).append("\"");
-        buffer.append("/>");
-        return buffer.toString();
+    public CharSequence toXML(String enclosingNamespace) {
+        return null;
     }
 }
