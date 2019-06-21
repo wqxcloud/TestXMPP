@@ -137,9 +137,9 @@ public class XmppConnection {
                 config.setSendPresence(false);
                 //设置开启压缩，可以节省流量
                 config.setCompressionEnabled(true);
-                config.setResource("TextXMPP");
+                config.setResource("TestXMPP");
                 //需要经过同意才可以添加好友
-                Roster.setDefaultSubscriptionMode(Roster.SubscriptionMode.accept_all);
+                Roster.setDefaultSubscriptionMode(Roster.SubscriptionMode.manual);
                 Roster.setRosterLoadedAtLoginDefault(true);
                 // 将相应机制隐掉
                 //SASLAuthentication.blacklistSASLMechanism("SCRAM-SHA-1");
@@ -159,8 +159,7 @@ public class XmppConnection {
         }
         return false;
     }
-    StanzaListener stanzaListener = new StanzaListener()
-    {
+    StanzaListener stanzaListener = new StanzaListener(){
         @Override
         public void processStanza(Stanza packet) throws SmackException.NotConnectedException, InterruptedException, SmackException.NotLoggedInException
         {
@@ -575,16 +574,16 @@ public class XmppConnection {
             for (ReportedData.Row row : rowList) {
                 user = new HashMap<>();
                 user.put("userAccount", row.getValues("jid").toString());
-                Log.i("wangqx", "search jid=" + row.getValues("jid").toString());//账号 100001
-                Log.i("wangqx", "search Username=" + row.getValues("Username").toString());//账号 100001
-                Log.i("wangqx", "search Name=" + row.getValues("Name").toString());//昵称
-                Log.i("wangqx", "search Email=" + row.getValues("Email").toString());
+                Log.i(TAG, "search jid=" + row.getValues("jid").toString());//账号 100001
+                Log.i(TAG, "search Username=" + row.getValues("Username").toString());//账号 100001
+                Log.i(TAG, "search Name=" + row.getValues("Name").toString());//昵称
+                Log.i(TAG, "search Email=" + row.getValues("Email").toString());
                 results.add(user);
                 // 若存在，则有返回,UserName一定非空，其他两个若是有设，一定非空
             }
 
         } catch (SmackException | InterruptedException | XmppStringprepException | XMPPException e) {
-            Log.i("wangqx", "searchUsers: e="+e);
+            Log.e(TAG, "searchUsers: e="+e);
             e.printStackTrace();
         }
         return results;
@@ -608,8 +607,8 @@ public class XmppConnection {
         try {
             UserSearchManager usm = new UserSearchManager(getConnection());
 
-            Log.i(TAG, "searchUsers: 域名："+JidCreate.domainBareFrom("vjud."+getConnection().getXMPPServiceDomain()).toString());
-            Form searchForm = usm.getSearchForm(JidCreate.domainBareFrom("vjud."+getConnection().getXMPPServiceDomain()));
+            Log.i(TAG, "searchUsers: 域名："+JidCreate.domainBareFrom("search."+getConnection().getXMPPServiceDomain()).toString());
+            Form searchForm = usm.getSearchForm(JidCreate.domainBareFrom("search."+getConnection().getXMPPServiceDomain()));
 
             if (searchForm == null)
                 return null;
@@ -629,7 +628,7 @@ public class XmppConnection {
             }
 
         } catch (SmackException | InterruptedException | XmppStringprepException | XMPPException e) {
-            Log.i("wangqx", "searchUsers: e="+e);
+            Log.e(TAG, "searchUsers: e="+e);
             e.printStackTrace();
         }
         return results;

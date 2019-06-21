@@ -31,7 +31,7 @@ public class MainActivity extends BaseActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
             ButterKnife.bind(this);
-            XmppConnection.getInstance().searchUsers("10001");
+            XmppConnection.getInstance().searchUsers2("1001");
             init();
         } catch (Exception e) {
             e.printStackTrace();
